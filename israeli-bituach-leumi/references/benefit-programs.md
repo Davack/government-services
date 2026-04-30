@@ -215,14 +215,26 @@ Free legal aid available through הסיוע המשפטי for low-income claimant
 | Claim miluim (employer refund) | 501 |
 | Claim long-term care | 2600 |
 | Claim cash siyud instead of services | 2655 |
+| Claim siyud during hospitalization | 2666 |
+| Restore siyud after >90 days in institution | 2640 |
 | Claim income support | 5619 |
 | Claim mobility (step 1, MoH) | 8220 |
 | Claim mobility (step 2, BTL) | 8200 |
 | Claim hostile-action victim recognition | 580 |
+| Apply to hostility-victim exceptions committee (incl. hostage families) | 595 / 596 |
+| Claim vocational rehabilitation | 270 |
+| Collect court-ordered alimony from BTL | 5400 |
+| Claim wages and severance after employer bankruptcy | 5305 |
+| Claim individual burial allowance | 460 |
+| Annual life certificate (recipient living abroad) | 10420 |
+| Authorize a representative (accountant, lawyer) | 70 |
 | Open self-employed file | 6101 |
 | Adjust self-employed advances | 672 |
 | Update personal details (address, bank, marital status) | 900 |
-| Appeal a BTL decision | 7810 (general) / 910 (claims committee) |
+| Cancel a Form 100 employer-outreach opt-out | 101 |
+| Appeal a BTL decision (general) | 7810 |
+| Appeal a work-injury medical-committee decision | 247 |
+| Refer a case to claims committee | 910 |
 
 ## Contact Channels
 

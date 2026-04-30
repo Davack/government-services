@@ -145,149 +145,38 @@ BTL pays unpaid wages, severance, and unused vacation when the employer goes ins
 
 ## Forms (טפסים)
 
-Bituach Leumi forms are numbered by program. Most can now be filed digitally through the personal area at **https://ps.btl.gov.il** (login with Israeli ID + password or one-time SMS code). PDF originals live at **https://www.btl.gov.il/טפסים-ואישורים** under per-program subfolders.
+Bituach Leumi runs ~85 numbered claim forms (טפסים) across the 13 programs above. The full catalog with form numbers, Hebrew names, who files each, and notes is in **`references/forms.md`** (organized by program: maternity, child allowance, old-age, survivors, unemployment, disability, work injury, vocational rehab, miluim, income support, alimony, employer bankruptcy, burial, long-term care, mobility, hostile-action victims, treaty / abroad, self-employed contributions, representation, general-purpose).
 
-> **Form 900 is NOT a benefit claim.** It is the general "Personal Details Update" form (הודעה על עדכון פרטים אישיים) used by anyone already receiving a benefit to change their address, marital status, or bank account. The actual program-specific claim forms are listed below.
+Most claims are filed digitally through the personal area at **https://ps.btl.gov.il**, where the form-PDF is auto-generated from the wizard. PDF originals live at **https://www.btl.gov.il/טפסים-ואישורים** under per-program subfolders.
 
-### Maternity, parental leave, birth grants
+> **Form 900 is NOT a benefit claim.** It is the general "Personal Details Update" form (הודעה על עדכון פרטים אישיים) used by anyone already receiving a benefit to change their address, marital status, or bank account.
+>
+> **Form 100 in BTL** is the opt-out from employer-outreach, NOT an employer report. The actual employer attachment to a 1500 unemployment claim is form **1514**. The "100" most accountants reference is a Tax Authority payslip-summary form, not a BTL form.
 
-| Form | Hebrew name | Filed by | Notes |
-|---|---|---|---|
-| 355 | תביעה לתשלום דמי לידה ליולדת | Mother (employee or self-employed) | Main maternity-pay claim |
-| 356 | תביעה לתשלום מענק לידה ודמי לידה לאם | Mother | Birth grant + maternity pay combined |
-| 300 | תביעה למענק לידה ולמענק אשפוז | Mother / hospital | Hospital normally files automatically |
-| 302 | תביעה לתשלום מענק לאב | Father | Birth grant for father |
-| 354 | תביעה לתשלום גמלת הורים לאב | Father | Parental-leave pay for father |
-| 360 | תביעה לתשלום דמי לידה לאב המחליף את בת/בן הזוג | Father | Partner-week split / paternity replacement |
-| 330 | תביעה לתשלום גמלה לשמירת הריון | Pregnant employee | Hazardous-pregnancy benefit. Pair with 331 |
-| 331 | אישור רפואי לגמלת שמירת הריון | Doctor | Companion to 330 |
-| 368 | תביעה להארכה או פיצול דמי לידה | Mother / parents | Extension or splitting between parents |
-| 381 | בקשה לשימור ותחזוק העסק במהלך תקופת לידה | Self-employed mother | Business-continuity grant |
+### Most-used forms
 
-### Child allowance and child savings
+| Need | Form | Filed by |
+|---|---|---|
+| Maternity allowance | 355 (or 356 with birth grant) | Mother |
+| Old-age pension | 480 | Resident at retirement age |
+| Unemployment | 1500 + employer 1514 | Laid-off employee + employer |
+| Work injury (initial) | 211 | Injured worker |
+| General disability | 7801 | Disabled adult |
+| Reserve duty (personal) | 502 / employer 501 | Reservist / employer |
+| Long-term care | 2600 | Elderly resident |
+| Income support | 5619 | Low-income resident |
+| Survivors | 410 | Widow/widower/orphan |
+| Mobility (step 1 to MoH) | 8220 → 8200 | Mobility-limited person |
+| Hostile-action victims | 580 (+ 595/596 for hostage families) | Injured / family |
+| Court-ordered alimony collection | 5400 | Alimony recipient |
+| Wages after employer bankruptcy | 5305 | Employee |
+| Vocational rehabilitation | 270 | Disabled / work-injured / survivor / terror victim |
+| Annual life certificate (abroad) | 10420 | Pension recipient living abroad |
+| Authorize a representative | 70 | Insured person |
+| Update address / bank / marital status | 900 | Existing beneficiary |
+| Self-employed file open | 6101 | New עצמאי |
 
-| Form | Hebrew name | Filed by | Notes |
-|---|---|---|---|
-| (auto) | (no form, hospital-reported) | Hospital | Births in Israel are reported automatically; provide bank details at the hospital |
-| 5025 | תביעה אישית לקצבת ילדים | Parent / guardian | Only when not auto-registered (birth abroad, custody change) |
-
-### Old-age pension and death
-
-| Form | Hebrew name | Filed by | Notes |
-|---|---|---|---|
-| 480 | תביעה לקצבת אזרח ותיק - זקנה | Resident at retirement age | Main claim |
-| 434 | תביעה למענק מעבר בגין העלאת גיל הפרישה | Affected age cohort | Transition grant |
-| 484 | תביעה לתוספת עבור בן/בת זוג | Pensioner | Spouse increment |
-| 430 | תביעה להשלמת הכנסה למקבל קצבאות אזרח ותיק ושאירים | Low-income pensioner | Income supplement |
-| 4501 | תביעה לגמלה מיוחדת לאזרח ותיק | Non-insured immigrant past retirement age | Special benefit |
-| 481 | בקשה למענק מיוחד לבני 67+ | Working pensioner | Special grant for 67+ |
-
-### Survivors
-
-| Form | Hebrew name | Filed by | Notes |
-|---|---|---|---|
-| 410 | תביעה לקצבת שאירים | Widow / widower / orphan | Main survivors claim. File within 12 months of death |
-| 416 | תביעה לתשלום מענק פטירה ו/או יתרת קצבה | Heirs | Death grant + pension balance |
-| 2910 | תביעה לדמי מחיה בעד יתום | Orphan / guardian | Orphan maintenance |
-| 412 | הצהרת הכנסות שאירים | Survivor | Income declaration |
-
-### Unemployment
-
-| Form | Hebrew name | Filed by | Notes |
-|---|---|---|---|
-| 1500 | תביעה לדמי אבטלה | Laid-off employee | Main claim. Use the joint workflow at taasuka.gov.il/applicants/sharedform |
-| 1514 | אישור המעסיק על תקופת ההעסקה והשכר | Employer | Required attachment to 1500 |
-| 1517 | תביעה למענק למובטל העובד בשכר נמוך | Low-wage worker | Supplement |
-
-### General disability and special services
-
-| Form | Hebrew name | Filed by | Notes |
-|---|---|---|---|
-| 7801 | תביעה לקצבת נכות כללית | Disabled adult under retirement age | Main claim |
-| 7849 | תביעה לקצבת שירותים מיוחדים | Severely disabled adult | Attendance allowance |
-| 7821 | תביעה לגמלה לילד נכה | Parent of disabled child | Disabled-child benefit |
-| 7842 | בקשה לבדיקה מחדש עקב החמרת מצב | Existing recipient | Reassessment |
-| 7810 | כתב ערר על החלטת המוסד | Claimant | Appeal |
-| 3296 | בקשה לתשלום תוספת תלויים | Recipient | Dependants increment |
-
-### Work injury
-
-| Form | Hebrew name | Filed by | Notes |
-|---|---|---|---|
-| 211 | תביעה לתשלום דמי פגיעה והודעה על פגיעה בעבודה | Injured employee | Initial injury-pay claim, the most common BL form |
-| 200 | תביעה לקביעת דרגת נכות מעבודה | Injured employee | Permanent disability claim (after 91-day dmei pgi'a period) |
-| 250 | טופס למתן טיפול רפואי לנפגע בעבודה - שכיר | Employee | Authorization slip for clinic / hospital |
-| 283 | אישור למתן טיפול רפואי - עצמאי | Self-employed | Same as 250 for self-employed |
-| 284 | הצהרת המעסיק על פגיעה בעבודה | Employer | Employer declaration |
-| 202 | תביעה להכרה במחלת מקצוע | Worker | Occupational-disease recognition |
-| 213 | תביעה לתשלום גמלה לבני משפחה של מי שנפטר מפגיעה בעבודה | Dependants | Dependants pension after fatal injury |
-
-### Reserve duty (miluim)
-
-| Form | Hebrew name | Filed by | Notes |
-|---|---|---|---|
-| 502 | תביעה אישית לתגמולי מילואים | Reservist (self-employed or below cap) | Personal claim |
-| 501 | תביעת מעסיק להחזרת תגמולי מילואים | Employer | Employer-refund claim |
-| 509 | בקשה לתשלום מקדמה על חשבון תגמולי מילואים | Reservist | Advance payment |
-| 510 | אישור המעסיק על עבודה ושכר | Employer | Salary confirmation |
-
-### Income support
-
-| Form | Hebrew name | Filed by | Notes |
-|---|---|---|---|
-| 5619 | תביעה לגמלת הבטחת הכנסה | Low-income resident | Main claim |
-| 5624 | בקשה לחידוש הזכאות | Returning claimant | Renewal |
-| 5521 | טופס למילוי על ידי מעסיק לתובעי הבטחת הכנסה | Employer | Employer attachment |
-| 5612 / 5613 | הצהרה לתובע/ת החי/ה בנפרד מבן/בת הזוג | Separated claimant | Separation declaration |
-
-### Long-term care
-
-| Form | Hebrew name | Filed by | Notes |
-|---|---|---|---|
-| 2600 | תביעה לגמלת סיעוד | Elderly resident | Main claim |
-| 2655 | גמלת סיעוד בכסף במקום שירותים | Recipient with dedicated caregiver | Cash-instead-of-services election |
-| 2620 | בקשה לבדיקה מחדש עקב טענת החמרה | Recipient | Reassessment |
-| 2670 | הצהרה לקביעת מעמד בודד | Single applicant | Single-status declaration |
-| 2604 | אישור על מגורים במוסד / בית אבות | Institution | Institutional residence confirmation |
-
-### Mobility
-
-| Form | Hebrew name | Filed by | Notes |
-|---|---|---|---|
-| 8220 | טופס לקביעת מוגבלות בניידות | Mobility-limited resident | Filed with Ministry of Health first (medical committee) |
-| 8200 | תביעה להטבות על פי הסכם הניידות | Approved claimant | Filed with BTL after MoH determination |
-
-### Hostile-action victims
-
-| Form | Hebrew name | Filed by | Notes |
-|---|---|---|---|
-| 580 | הודעה על פגיעה בפעולות איבה ותביעה להכרה כנפגע | Injured / family | Initial recognition + claim |
-| 581 | בקשה לקביעת דרגת נכות ולתשלום תגמול נכות | Recognized victim | Disability-degree determination |
-| 582 | תביעה לתגמולים למשפחות הנספים | Family of deceased victim | Family compensation |
-| 571 | בקשה לתגמול טיפול רפואי | Recognized victim | Medical-treatment compensation |
-| 577 | תשאול נפגע הטוען לפגיעה נפשית | Victim claiming psychological injury | PTSD / mental injury intake |
-
-### Insurance contributions (self-employed)
-
-| Form | Hebrew name | Filed by | Notes |
-|---|---|---|---|
-| 6101 | דין וחשבון רב שנתי | Self-employed / non-working resident | Opens collection file, sets advance payments. Required when starting as עצמאי |
-| 672 | בקשה לתיקון מקדמות | Self-employed | Adjust monthly advances (up to 4 times per year) |
-| 6131 | הצהרת עיסוקים | Resident changing employment status | Status update |
-| 627 / 628 | שאלון לקביעת תושבות | Resident temporarily abroad / returning | Residency determination |
-| 673 | הצהרת בני/בנות זוג | Non-working spouse | Spouse-exemption declaration |
-
-### General-purpose forms (every program uses these)
-
-| Form | Hebrew name | Use | Notes |
-|---|---|---|---|
-| 900 | הודעה על עדכון פרטים אישיים | Update address, marital status, bank account | NOT a claim form, for existing beneficiaries |
-| 715 | בקשה להעברת כספים | Reroute payment | |
-| 88 | כתב הסכמה והתחייבות לקבלת גמלה | Beneficiary commitment | When benefit paid via third party |
-| 17 | כתב ויתור לחברות הביטוח | Privacy waiver to private insurers | |
-| 20 | בקשה להענקה מטעמי צדק | Equity grant request | When statutory entitlement is denied but hardship exists |
-| 910 | פנייה לוועדת תביעות | Claims committee referral | Internal-appeal channel |
-| 851 | בקשה לקבלת מידע לפי חוק חופש המידע | FOI request | |
+For any form not listed above, see `references/forms.md` for the complete catalog or search at https://www.btl.gov.il/טפסים-ואישורים/FormSearch/Pages/default.aspx.
 
 ## Contribution Rates (2026)
 
