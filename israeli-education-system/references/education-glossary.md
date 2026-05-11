@@ -44,7 +44,7 @@
 - Civics (Ezrachut): 2 units
 - Minimum 21 total units for certificate
 
-## Universities
+## Universities (11 CHE-recognized as of 2026)
 | Institution | City | Type |
 |------------|------|------|
 | Hebrew University | Jerusalem | Research |
@@ -54,4 +54,25 @@
 | University of Haifa | Haifa | Research |
 | Bar-Ilan University | Ramat Gan | Research |
 | Weizmann Institute | Rehovot | Graduate science |
-| Open University | Distance | Open admissions |
+| Open University | Distance | Open admissions (no Bagrut/PET required) |
+| Reichman University | Herzliya | Research (granted university status 2021; formerly IDC) |
+| Ariel University | Ariel | Research (granted university status 2012) |
+| University of Kiryat Shmona in the Galilee | Kiryat Shmona | Research (CHE-approved 22 Jan 2026, effective 2026/27 academic year, 5-year provisional; ex-Tel-Hai Academic College) |
+
+## English Placement Tests (Distinct from Bagrut English)
+| Test | Hebrew | Purpose |
+|------|--------|---------|
+| Amir | אמי"ר | English-level placement (paper); same content as PET English |
+| Amiram | אמיר"ם | Computerized equivalent of Amir; more frequent sittings |
+| Yael | יע"ל | Hebrew proficiency for non-Hebrew speakers (olim, internationals) |
+| Amirnett | אמירנט | Replaces PET English from December 2026 |
+| MOR | מור | Multi-Mini Interview required by all Israeli medical schools |
+
+## Alternative Admission Routes
+| Route | Hebrew | Description |
+|-------|--------|-------------|
+| Mechina-Aharei-Tzava | מכינה אחרי צבא | Post-army preparatory; subsidized for periphery, lone soldiers, olim, single parents |
+| Atuda Akademait | עתודה אקדמית | IDF-sponsored degree; tuition + stipend in exchange for ~4-5y service post-graduation |
+| Naale | נעל"ה | Bagrut in Israel for diaspora teens; recognized by all universities |
+| Olim PET exemption | פטור מפסיכומטרי לעולים | Olim chadashim are exempt from PET for first 3 years post-aliyah at most universities |
+| Open University petuach | מודל פתוח | 108 credit points = full degree, no Bagrut/PET prerequisite |

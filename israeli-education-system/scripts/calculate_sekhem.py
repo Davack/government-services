@@ -17,17 +17,24 @@ import json
 import sys
 
 
-# 5-unit bonus points for university admissions
+# 5-unit bonus points for university admissions (canonical 2026 cycle).
+# Math gets +35; everything else gets +25. Some universities apply a stacking
+# rule (math 5yl + two science 5yl => +30 per science instead of +25);
+# this script applies the base table only. Verify with the program's official
+# bonus table for the authoritative number.
 FIVE_UNIT_BONUSES = {
     "Mathematics": 35,
     "Math": 35,
-    "English": 35,
+    "English": 25,
     "Physics": 25,
     "Chemistry": 25,
     "Biology": 25,
     "Computer Science": 25,
     "Arabic": 25,
     "French": 25,
+    "Literature": 25,
+    "Bible": 25,
+    "History": 25,
 }
 
 # Psychometric score percentile mapping
@@ -209,12 +216,14 @@ def interpret_psychometric(score: int) -> None:
     print(f"Assessment: {assessment}")
     print()
 
-    remaining_attempts = 3  # Maximum total attempts
-    print(f"Maximum attempts: {remaining_attempts} total")
+    print("Maximum attempts: unlimited (NITE removed the prior 8-attempt cap; highest score counts)")
     print("Available in: Hebrew, Arabic, Russian, French, Spanish")
-    print("Cost: ~500 NIS per sitting")
+    print("Cost: 665 NIS standard registration (2026); late registration ~150% of standard")
     print()
-    print("Popular prep courses: Kidum, Yoel Geva, Atid, Psagot")
+    print("From December 2026: English moves to a separate computerized test (Amirnett);")
+    print("the main PET shrinks to 2 sections (Verbal + Quantitative). Verify on nite.org.il.")
+    print()
+    print("Popular prep courses: Kidum, High-Q, Yoel Geva, Psagot")
     print("Free practice: nite.org.il")
 
 
