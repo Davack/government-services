@@ -22,6 +22,7 @@ Part of [Skills IL](https://github.com/skills-il) — curated AI agent skills fo
 | [israeli-real-estate](./israeli-real-estate/) | Israeli property data, mas rechisha (purchase tax) calculator, Tabu extracts, and rental agreement guidance. | `calculate_mas_rechisha.py` | 1 |
 | [israeli-statistics](./israeli-statistics/) | CBS (Central Bureau of Statistics) data: CPI, housing price indices, GDP, unemployment, demographics. | `fetch_cbs_data.py` | 1 |
 | [knesset-legislative-tracker](./knesset-legislative-tracker/) | Knesset Open Data API: bill tracking, committee sessions, MK voting records, tech-sector legislation alerts. | `fetch_knesset.py` | 1 |
+| [knesset-legislation](./knesset-legislation/) | Knesset parliamentary database via OData v4 API: bills, enacted laws, committees, MK voting records, parliamentary questions, secondary legislation. | `query_knesset.py` | 8 |
 
 ## Install
 

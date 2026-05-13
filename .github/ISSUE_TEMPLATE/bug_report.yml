@@ -22,6 +22,7 @@ body:
         - israeli-real-estate
         - israeli-statistics
         - knesset-legislative-tracker
+        - knesset-legislation
         - Other
     validations:
       required: true

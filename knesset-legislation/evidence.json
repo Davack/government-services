@@ -1,0 +1,82 @@
+[
+  {
+    "claim": "The Knesset OData v4 API base URL is https://knesset.gov.il/OdataV4/ParliamentInfo/",
+    "source_url": "https://knesset.gov.il/OdataV4/ParliamentInfo",
+    "verified_date": "2026-05-13"
+  },
+  {
+    "claim": "The API is OData v4 and requires no authentication",
+    "source_url": "https://knesset.gov.il/OdataV4/ParliamentInfo/$metadata",
+    "verified_date": "2026-05-13"
+  },
+  {
+    "claim": "The full schema (field names, types, relationships) is exposed at the $metadata endpoint",
+    "source_url": "https://knesset.gov.il/OdataV4/ParliamentInfo/$metadata",
+    "verified_date": "2026-05-13"
+  },
+  {
+    "claim": "Available tables are discoverable by querying the base URL",
+    "source_url": "https://knesset.gov.il/OdataV4/ParliamentInfo",
+    "verified_date": "2026-05-13"
+  },
+  {
+    "claim": "In OData v4, the primary key field for all Knesset tables is always 'Id' (not BillID, PersonID, CommitteeID, etc.)",
+    "source_url": "https://knesset.gov.il/OdataV4/ParliamentInfo/$metadata",
+    "verified_date": "2026-05-13"
+  },
+  {
+    "claim": "KNS_CommitteeSession StatusID 193 represents a cancelled session",
+    "source_url": "https://knesset.gov.il/OdataV4/ParliamentInfo/$metadata",
+    "verified_date": "2026-05-13"
+  },
+  {
+    "claim": "MK position IDs: 43 = ח\"כ (male MK), 61 = ח\"כית (female MK), 41 = committee chair, 54 = faction member",
+    "source_url": "https://knesset.gov.il/OdataV4/ParliamentInfo/$metadata",
+    "verified_date": "2026-05-13"
+  },
+  {
+    "claim": "GroupTypeID 28 in KNS_DocumentPlenumSession identifies the official Divrei HaKnesset transcript",
+    "source_url": "https://knesset.gov.il/OdataV4/ParliamentInfo/$metadata",
+    "verified_date": "2026-05-13"
+  },
+  {
+    "claim": "Knesset number 0 in the system represents the Provisional State Council (מועצת המדינה הזמנית)",
+    "source_url": "https://main.knesset.gov.il/activity/info/pages/databases.aspx",
+    "verified_date": "2026-05-13"
+  },
+  {
+    "claim": "Data quality in the Knesset database improves significantly from Knesset 17 onward; older records may have gaps",
+    "source_url": "https://main.knesset.gov.il/activity/info/pages/databases.aspx",
+    "verified_date": "2026-05-13"
+  },
+  {
+    "claim": "KNS_Law and KNS_DocumentLaw exist only in the v2 API; in v4 those records moved into KNS_Bill",
+    "source_url": "https://knesset.gov.il/OdataV4/ParliamentInfo/$metadata",
+    "verified_date": "2026-05-13"
+  },
+  {
+    "claim": "KNS_PlenumVote uses the field VoteTitle for the vote description; the field ItemTitle does not exist on this table",
+    "source_url": "https://knesset.gov.il/OdataV4/ParliamentInfo/$metadata",
+    "verified_date": "2026-05-13"
+  },
+  {
+    "claim": "KNS_PlenumVoteResult uses MkId (not PersonID) as the MK foreign key, and ResultDesc (not ResultCode) for the outcome",
+    "source_url": "https://knesset.gov.il/OdataV4/ParliamentInfo/$metadata",
+    "verified_date": "2026-05-13"
+  },
+  {
+    "claim": "KNS_Query stores the ministry as GovMinistryID (integer foreign key), not a text name field",
+    "source_url": "https://knesset.gov.il/OdataV4/ParliamentInfo/$metadata",
+    "verified_date": "2026-05-13"
+  },
+  {
+    "claim": "Sorting KNS_PlmSessionItem by Ordinal is a known API bug and results are unreliable",
+    "source_url": "https://knesset.gov.il/OdataV4/ParliamentInfo",
+    "verified_date": "2026-05-13"
+  },
+  {
+    "claim": "The table name KNS_IsraelLawClassificiation contains an intentional double-'i' typo in the API",
+    "source_url": "https://knesset.gov.il/OdataV4/ParliamentInfo/$metadata",
+    "verified_date": "2026-05-13"
+  }
+]

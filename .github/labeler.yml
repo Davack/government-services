@@ -53,3 +53,7 @@ israeli-statistics:
 knesset-legislative-tracker:
   - changed-files:
     - any-glob-to-any-file: 'knesset-legislative-tracker/**'
+
+knesset-legislation:
+  - changed-files:
+    - any-glob-to-any-file: 'knesset-legislation/**'

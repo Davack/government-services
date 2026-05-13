@@ -1,0 +1,26 @@
+{
+  "author": "Davack",
+  "version": "1.0.0",
+  "category": "government-services",
+  "tags": {
+    "he": ["כנסת", "חקיקה", "פרלמנט", "חוק", "הצבעה", "ועדה", "חבר-כנסת", "סיעה", "ישראל"],
+    "en": ["knesset", "legislation", "parliament", "israeli-law", "vote", "committee", "mk", "faction", "israel"]
+  },
+  "display_name": {
+    "he": "מאגר החקיקה הלאומי",
+    "en": "The National Legislation Database"
+  },
+  "display_description": {
+    "he": "שאילתת מאגר החקיקה הלאומי של הכנסת דרך OData v4 API. לשימוש עבור הצעות חוק, חוקים, חברי כנסת, ועדות, ישיבות, הצבעות, שאילתות פרלמנטריות, הצעות לסדר-היום וחקיקת משנה.",
+    "en": "Query the The National Legislation Database database via OData v4 API. Covers bills, enacted laws, MKs, committees, votes, parliamentary questions, agenda proposals, and secondary legislation."
+  },
+  "supported_agents": [
+    "claude-code",
+    "cursor",
+    "github-copilot",
+    "windsurf",
+    "opencode",
+    "codex",
+    "gemini-cli"
+  ]
+}
