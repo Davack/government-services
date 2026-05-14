@@ -111,7 +111,9 @@ def show_bid_guide() -> None:
         ("4. Determine bid price",
          "Research comparable tenders. Winning bids often 10-50%+ above minimum."),
         ("5. Submit before deadline",
-         "Physical submission, sealed envelope. Late = disqualified."),
+         "Online submission via MichrazimSite (digital ID required); some "
+         "specialty tenders still require a physical sealed envelope - check "
+         "the specific tender. Late = disqualified."),
         ("6. Post-submission",
          "Public opening, results on RMI website, sign development agreement."),
     ]

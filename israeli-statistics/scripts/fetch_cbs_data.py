@@ -2,13 +2,23 @@
 """
 Fetch Israeli CBS (Central Bureau of Statistics) Data
 
-Standalone utility for querying the Israeli Central Bureau of Statistics
-data through data.gov.il, including CPI, housing prices, and economic indicators.
+Standalone utility for querying the Israeli Central Bureau of Statistics.
+
+Economic / price time series (CPI, housing prices, producer prices, building
+input costs) come from the CBS Price Indices API at api.cbs.gov.il. That API
+is the canonical source for "hamadad" data:
+  - https://api.cbs.gov.il/index/catalog/catalog?format=json  (list of indices)
+  - https://api.cbs.gov.il/index/data/price?id=<code>&format=json  (a series)
+
+NOTE: data.gov.il (organization "lamas") hosts a small set of CBS datasets
+(census tabulations, localities, traffic accidents) but does NOT host the
+CPI / GDP / unemployment time series. For those, use api.cbs.gov.il.
 
 Usage:
     python fetch_cbs_data.py cpi
     python fetch_cbs_data.py rent-calc --old-cpi 100.0 --new-cpi 103.5 --rent 5000
-    python fetch_cbs_data.py search "consumer price"
+    python fetch_cbs_data.py search "דירות"
+    python fetch_cbs_data.py indicators
 """
 
 import argparse
@@ -18,90 +28,95 @@ import urllib.request
 import urllib.parse
 import urllib.error
 
-BASE_URL = "https://data.gov.il/api/3"
+# CBS Price Indices API (CPI, housing prices, producer prices, building costs).
+CBS_API_BASE = "https://api.cbs.gov.il/index"
+
+# Known index codes from the CBS catalog (mainCode values).
+CPI_CODE = 120010      # מדד המחירים לצרכן - כללי (general CPI)
+HOUSING_CODE = 40010   # מחירי דירות (apartment prices)
 
 
-def api_get(endpoint: str, params: dict = None) -> dict:
-    """Make a GET request to data.gov.il API."""
-    url = f"{BASE_URL}/{endpoint}"
-    if params:
-        url += "?" + urllib.parse.urlencode(params)
+def cbs_api_get(endpoint: str, params: dict = None) -> dict:
+    """Make a GET request to the CBS Price Indices API (api.cbs.gov.il)."""
+    url = f"{CBS_API_BASE}/{endpoint}"
+    query = dict(params or {})
+    query.setdefault("format", "json")
+    url += "?" + urllib.parse.urlencode(query)
 
     req = urllib.request.Request(url)
-    req.add_header("User-Agent", "israeli-statistics-skill/1.0")
+    req.add_header("User-Agent", "israeli-statistics-skill/1.1")
+    req.add_header("Accept", "application/json")
 
     try:
         with urllib.request.urlopen(req, timeout=30) as resp:
-            data = json.loads(resp.read().decode("utf-8"))
-            if data.get("success"):
-                return data.get("result", {})
-            else:
-                print(f"API error: {data.get('error', 'Unknown')}", file=sys.stderr)
-                sys.exit(1)
+            return json.loads(resp.read().decode("utf-8"))
     except urllib.error.HTTPError as e:
         print(f"HTTP error {e.code}: {e.reason}", file=sys.stderr)
         sys.exit(1)
     except urllib.error.URLError as e:
         print(f"Connection error: {e.reason}", file=sys.stderr)
         sys.exit(1)
+    except json.JSONDecodeError:
+        print("Error: CBS API did not return JSON. Check the endpoint and "
+              "parameters at https://api.cbs.gov.il", file=sys.stderr)
+        sys.exit(1)
 
 
-def search_cbs_datasets(query: str) -> None:
-    """Search for CBS statistical datasets."""
-    result = api_get("action/package_search", {
-        "q": query,
-        "fq": "organization:cbs",
-        "rows": 15
-    })
+def search_cbs_indices(query: str) -> None:
+    """Search the CBS index catalog for matching price/economic indices."""
+    catalog = cbs_api_get("catalog/catalog")
+    chapters = catalog.get("chapters", [])
 
-    count = result.get("count", 0)
-    datasets = result.get("results", [])
+    q = query.strip().lower()
+    matches = [c for c in chapters if q in (c.get("chapterName") or "").lower()]
 
-    print(f"CBS Datasets matching '{query}': {count} found\n")
+    print(f"CBS indices matching '{query}': {len(matches)} found\n")
+    if not matches:
+        print("No matching index in the catalog. The catalog covers price and")
+        print("economic indices only. For census tabulations, localities, or")
+        print("traffic-accident datasets, search data.gov.il (organization 'lamas').")
+        return
 
-    for ds in datasets:
-        title = ds.get("title", "Untitled")
-        ds_id = ds.get("name", "")
-        modified = ds.get("metadata_modified", "Unknown")[:10]
-        resources = len(ds.get("resources", []))
-        notes = (ds.get("notes") or "")[:100]
-
-        print(f"  [{ds_id}]")
-        print(f"  Title: {title}")
-        print(f"  Modified: {modified} | Resources: {resources}")
-        if notes:
-            print(f"  Notes: {notes}...")
+    for c in matches:
+        main_code = c.get("mainCode")
+        name = c.get("chapterName", "(no name)")
+        order = c.get("chapterOrder", "")
+        print(f"  mainCode: {main_code}")
+        print(f"  Name: {name}")
+        if order:
+            print(f"  Chapter order: {order}")
+        if main_code:
+            print(f"  Series: {CBS_API_BASE}/data/price?id={main_code}&format=json")
         print()
+
+    print("Fetch a series with:")
+    print(f"  curl '{CBS_API_BASE}/data/price?id=<mainCode>&format=json'")
 
 
 def fetch_cpi_info() -> None:
-    """Display CPI (Consumer Price Index) information and latest data."""
+    """Display CPI (Consumer Price Index) latest data from api.cbs.gov.il."""
     print("=== Israeli Consumer Price Index (CPI / Hamadad) ===\n")
 
-    # Search for CPI datasets
-    result = api_get("action/package_search", {
-        "q": "madad mchirim",
-        "fq": "organization:cbs",
-        "rows": 5
-    })
-
-    datasets = result.get("results", [])
-    if datasets:
-        print("Available CPI datasets on data.gov.il:\n")
-        for ds in datasets:
-            title = ds.get("title", "Untitled")
-            ds_id = ds.get("name", "")
-            print(f"  - {title}")
-            print(f"    ID: {ds_id}")
-            resources = ds.get("resources", [])
-            for r in resources[:3]:
-                r_id = r.get("id", "")
-                r_name = r.get("name", r.get("description", ""))
-                r_format = r.get("format", "")
-                print(f"    Resource: {r_name} ({r_format}) - {r_id}")
-            print()
+    data = cbs_api_get("data/price", {"id": CPI_CODE})
+    months = data.get("month", [])
+    if months:
+        series = months[0]
+        print(f"Series: {series.get('name', 'CPI')}  (code {series.get('code', CPI_CODE)})")
+        print()
+        print(f"  {'Period':<14} {'Index':<10} {'Monthly %':<12} {'Annual %'}")
+        print("  " + "-" * 48)
+        for entry in series.get("date", [])[:6]:
+            year = entry.get("year", "")
+            month_desc = entry.get("monthDesc", "")
+            period = f"{month_desc} {year}".strip()
+            curr_base = entry.get("currBase") or {}
+            value = curr_base.get("value", "")
+            percent = entry.get("percent", "")
+            percent_year = entry.get("percentYear", "")
+            print(f"  {period:<14} {str(value):<10} {str(percent):<12} {percent_year}")
+        print()
     else:
-        print("No CPI datasets found. Try searching manually.\n")
+        print("No CPI data returned. Check api.cbs.gov.il.\n")
 
     print("CPI Component Weights (approximate):")
     print(f"  {'Component':<30} {'Weight'}")
@@ -121,7 +136,7 @@ def fetch_cpi_info() -> None:
 
     print()
     print("Publication: Monthly, ~15th of following month")
-    print("Source: CBS (cbs.gov.il)")
+    print("Source: CBS Price Indices API (api.cbs.gov.il), index code 120010")
 
 
 def calculate_rent_adjustment(old_cpi: float, new_cpi: float, rent: float) -> None:
@@ -156,35 +171,38 @@ def calculate_rent_adjustment(old_cpi: float, new_cpi: float, rent: float) -> No
         print("No change in CPI -- rent remains the same.")
 
     print()
-    print("NOTE: Verify CPI values at cbs.gov.il. Adjustments are typically")
-    print("annual, not monthly. Check your specific contract terms.")
+    print("NOTE: Verify CPI values at api.cbs.gov.il (index code 120010) or")
+    print("cbs.gov.il. Adjustments are typically annual, not monthly. Check")
+    print("your specific contract terms.")
 
 
 def show_indicators() -> None:
     """Display key economic indicator summary."""
     print("=== Key Israeli Economic Indicators ===\n")
-    print("Data available from CBS (cbs.gov.il):\n")
+    print("Price indices (CPI, housing, producer prices, building costs) are")
+    print("served by the CBS Price Indices API at api.cbs.gov.il.")
+    print("GDP, unemployment, population, and trade series are published as")
+    print("CBS tables at cbs.gov.il (not all are exposed via a public API).\n")
 
     indicators = [
-        ("GDP Growth", "Quarterly", "National Accounts", "16.x"),
-        ("Unemployment Rate", "Monthly", "Labor Force Survey", "12.x"),
-        ("CPI / Inflation", "Monthly", "Price Statistics", "12.x"),
-        ("Housing Price Index", "Quarterly", "Price Statistics", "12.x"),
-        ("Building Starts", "Monthly", "Construction", "19.x"),
-        ("Population", "Annual", "Population", "2.x"),
-        ("Aliyah (Immigration)", "Monthly", "Migration", "4.x"),
-        ("Exports", "Monthly", "Foreign Trade", "16.x"),
-        ("Imports", "Monthly", "Foreign Trade", "16.x"),
-        ("Average Wage", "Quarterly", "Labor", "12.x"),
+        ("CPI / Inflation", "Monthly", "api.cbs.gov.il, code 120010"),
+        ("Housing Price Index", "Monthly", "api.cbs.gov.il, code 40010"),
+        ("Producer Prices (PPI)", "Monthly", "api.cbs.gov.il, code 170030"),
+        ("Building input costs", "Monthly", "api.cbs.gov.il, code 200010"),
+        ("GDP Growth", "Quarterly", "cbs.gov.il National Accounts tables"),
+        ("Unemployment Rate", "Monthly", "cbs.gov.il Labour Force Survey"),
+        ("Population", "Annual", "cbs.gov.il Population tables"),
+        ("Foreign Trade", "Monthly", "cbs.gov.il Foreign Trade tables"),
     ]
 
-    print(f"  {'Indicator':<25} {'Frequency':<12} {'Subject':<22} {'Table'}")
+    print(f"  {'Indicator':<25} {'Frequency':<12} {'Source'}")
     print("  " + "-" * 70)
-    for name, freq, subject, table in indicators:
-        print(f"  {name:<25} {freq:<12} {subject:<22} {table}")
+    for name, freq, source in indicators:
+        print(f"  {name:<25} {freq:<12} {source}")
 
     print()
-    print("Access data at: https://www.cbs.gov.il or via data.gov.il API")
+    print("Index catalog: https://api.cbs.gov.il/index/catalog/catalog?format=json")
+    print("CBS portal:    https://www.cbs.gov.il")
 
 
 def main():
@@ -194,7 +212,7 @@ def main():
     subparsers = parser.add_subparsers(dest="command", help="Command to run")
 
     # CPI info
-    subparsers.add_parser("cpi", help="CPI information and datasets")
+    subparsers.add_parser("cpi", help="CPI latest data and component weights")
 
     # Rent calculator
     rent_parser = subparsers.add_parser("rent-calc", help="Rent adjustment calculator")
@@ -206,11 +224,12 @@ def main():
                              help="Current monthly rent (NIS)")
 
     # Search
-    search_parser = subparsers.add_parser("search", help="Search CBS datasets")
-    search_parser.add_argument("query", help="Search query")
+    search_parser = subparsers.add_parser(
+        "search", help="Search the CBS index catalog (price/economic indices)")
+    search_parser.add_argument("query", help="Search query (Hebrew or English)")
 
     # Indicators
-    subparsers.add_parser("indicators", help="Key economic indicators")
+    subparsers.add_parser("indicators", help="Key economic indicators and sources")
 
     args = parser.parse_args()
 
@@ -219,7 +238,7 @@ def main():
     elif args.command == "rent-calc":
         calculate_rent_adjustment(args.old_cpi, args.new_cpi, args.rent)
     elif args.command == "search":
-        search_cbs_datasets(args.query)
+        search_cbs_indices(args.query)
     elif args.command == "indicators":
         show_indicators()
     else:

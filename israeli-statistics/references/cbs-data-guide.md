@@ -3,7 +3,13 @@
 ## Central Bureau of Statistics (CBS)
 - URL: https://www.cbs.gov.il
 - English: https://www.cbs.gov.il/en
-- Data portal: data.gov.il (organization: cbs)
+- Price Indices API (canonical for economic series): https://api.cbs.gov.il/index
+- Data portal: data.gov.il (organization: lamas)
+
+## Where the data lives
+- **Price and economic time series** (CPI, housing prices, producer prices, building input costs) come from the **CBS Price Indices API** at `api.cbs.gov.il/index`. List all indices: `api.cbs.gov.il/index/catalog/catalog?format=json`. Fetch one series: `api.cbs.gov.il/index/data/price?id=<mainCode>&format=json` (CPI is code `120010`, apartment prices `40010`, producer prices `170030`).
+- **data.gov.il organization `lamas`** hosts a small set of CBS datasets (census tabulations, localities, traffic accidents). It does **NOT** host the CPI / GDP / unemployment time series. Use the `lamas` slug (not `cbs`) when searching data.gov.il.
+- GDP, unemployment, population, and foreign-trade series are published as CBS tables at `cbs.gov.il` and are not all exposed via a public API.
 
 ## Publication Schedule
 | Indicator | Frequency | Typical Release |

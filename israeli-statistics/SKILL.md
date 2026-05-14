@@ -1,9 +1,9 @@
 ---
 name: israeli-statistics
-description: Access Israeli Central Bureau of Statistics (CBS) data including CPI, housing price indices, economic indicators, and demographic data. Use when user asks about Israeli statistics, "hamadad", CPI, consumer price index, housing prices, "madad mchirei dirot", GDP, unemployment, population data, CBS data, "halishka hamerkazit listatistika", producer prices, building starts, or any Israeli economic/demographic statistics. Enhances israel-statistics-mcp server with index interpretation and economic context. Do NOT use for non-Israeli statistics or financial forecasting.
+description: Access Israeli Central Bureau of Statistics (CBS) data including CPI, housing price indices, economic indicators, and demographic data. Use when user asks about Israeli statistics, "hamadad", CPI, consumer price index, housing prices, "madad mchirei dirot", GDP, unemployment, population data, CBS data, "halishka hamerkazit listatistika", producer prices, building starts, or any Israeli economic/demographic statistics. Enhances the israel-statistics MCP server with index interpretation and economic context. Do NOT use for non-Israeli statistics or financial forecasting.
 license: MIT
 allowed-tools: Bash(python:*) WebFetch
-compatibility: Network access helpful for CBS data lookups. Enhanced by israel-statistics-mcp server (8 tools).
+compatibility: Network access helpful for CBS data lookups. Enhanced by the israel-statistics MCP server.
 ---
 
 # Israeli Statistics (CBS)
@@ -117,7 +117,12 @@ CBS is the authoritative source for Israeli demographics:
 - Marriage and divorce rates
 
 ### Step 6: Querying CBS Data
-Using the israel-statistics-mcp server or direct CBS access:
+Using the israel-statistics MCP server or direct CBS access.
+
+**Two distinct data sources:**
+- **CBS Price Indices API** (`api.cbs.gov.il/index`): the canonical source for CPI, housing prices, producer prices, and building input costs. List indices at `api.cbs.gov.il/index/catalog/catalog?format=json`, fetch a series at `api.cbs.gov.il/index/data/price?id=<code>&format=json` (CPI is `120010`, apartment prices `40010`).
+- **data.gov.il** under organization `lamas` (not `cbs`): hosts a small set of CBS datasets such as census tabulations, localities, and traffic accidents. It does NOT host the CPI/GDP/unemployment time series.
+- GDP, unemployment, population, and foreign-trade series are published as numbered CBS tables at `cbs.gov.il` and are not all exposed via a public API.
 
 **CBS table structure:**
 - Tables are identified by number (e.g., Table 2.1, Table 12.5)
@@ -159,10 +164,17 @@ Result: Present latest GDP growth (quarterly, annualized), unemployment rate, CP
 ## Bundled Resources
 
 ### Scripts
-- `scripts/fetch_cbs_data.py` — Search CBS datasets on data.gov.il, fetch CPI (hamadad) component weights and available datasets, calculate madad-linked rent adjustments from old/new CPI values, and display a key economic indicators dashboard with CBS table references. Supports subcommands: `cpi`, `rent-calc`, `search`, `indicators`. Run: `python scripts/fetch_cbs_data.py --help`
+- `scripts/fetch_cbs_data.py` - Query the CBS Price Indices API (`api.cbs.gov.il`): fetch the latest CPI (hamadad) values plus component weights, search the index catalog, calculate madad-linked rent adjustments from old/new CPI values, and display a key economic indicators summary with the right source per series. Supports subcommands: `cpi`, `rent-calc`, `search`, `indicators`. Run: `python scripts/fetch_cbs_data.py --help`
 
 ### References
-- `references/cbs-data-guide.md` — CBS publication schedule for all major indicators (CPI, housing prices, GDP, unemployment, building starts), CPI component weights, the rent adjustment formula for madad-linked contracts, and CBS table number reference by subject area (population 2.x, prices 12.x, construction 19.x, etc.). Consult when determining data availability timing or locating the correct CBS table number.
+- `references/cbs-data-guide.md` - CBS publication schedule for all major indicators (CPI, housing prices, GDP, unemployment, building starts), CPI component weights, the rent adjustment formula for madad-linked contracts, and CBS table number reference by subject area (population 2.x, prices 12.x, construction 19.x, etc.). Consult when determining data availability timing or locating the correct CBS table number.
+
+## Recommended MCP Servers
+
+| MCP Server | What it adds | Link |
+|------------|--------------|------|
+| israel-statistics | Tools for CBS catalog browsing and economic-data lookups (CPI, housing, indicators) to pair with this skill's interpretation guidance | https://agentskills.co.il/he/mcp/israel-statistics |
+| israeli-cbs | Alternative CBS MCP server for querying Israeli statistics tables and price indices | https://agentskills.co.il/he/mcp/israeli-cbs |
 
 ## Gotchas
 - The Central Bureau of Statistics (CBS/Lama"s) publishes data primarily in Hebrew. API responses and dataset metadata use Hebrew field names. Agents may fail to parse non-ASCII column names.
@@ -175,8 +187,9 @@ Result: Present latest GDP growth (quarterly, annualized), unemployment rate, CP
 | Source | URL | What to Check |
 |--------|-----|---------------|
 | Central Bureau of Statistics | https://www.cbs.gov.il | CPI, housing prices, employment, population tables |
+| CBS Price Indices API | https://api.cbs.gov.il/index/catalog/catalog?format=json | Canonical API for CPI, housing, producer-price, and building-cost series (use `data/price?id=<code>` to fetch a series) |
 | CBS publication schedule | https://www.cbs.gov.il/he/pages/calendar.aspx | Release calendar for CPI, GDP, housing, demographics |
-| data.gov.il – statistics | https://data.gov.il/organization/lamas | Machine-readable CBS datasets (CSV, API) |
+| data.gov.il - CBS datasets | https://data.gov.il/organization/lamas | Census tabulations, localities, and traffic-accident datasets (organization `lamas`, NOT `cbs`); does not host CPI/GDP time series |
 | Bank of Israel data | https://www.boi.org.il | Monetary, financial, and exchange-rate data |
 | CBS English portal | https://www.cbs.gov.il/en/Pages/default.aspx | English-language statistical tables and publications |
 
@@ -192,4 +205,4 @@ Solution: Ensure both values being compared use the same base period. CBS publis
 
 ### Error: "Hebrew column names in data"
 Cause: CBS data tables primarily use Hebrew headers
-Solution: Use the israel-statistics-mcp server which can interpret Hebrew field names. Or query with limit=1 to inspect column structure before full data retrieval.
+Solution: Use the israel-statistics MCP server which can interpret Hebrew field names. Or query with limit=1 to inspect column structure before full data retrieval.
